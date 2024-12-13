@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              RedError: "hsl(0, 100%, 66%)",
+              White: "hsl(0, 0%, 100%)",
+              LightGrayishViolet: "hsl(270, 3%, 87%)",
+              DarkGrayishViolet: "hsl(279, 6%, 55%)",
+              VeryDarkViolet: "hsl(278, 68%, 11%)",
+            },
+            fontFamily: {
+              SpaceGrotesk: ["Space Grotesk", "sans-serif"],
+            },
+            backgroundImage: {
+              "card-front": 'url("./images/bg-card-front.png")',
+              "card-back": 'url("./images/bg-card-back.png")',
+            },
+          },
+        },
+      };
+    </script>
+
+    <title>Frontend Mentor | Interactive card details form</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body class="w-full h-screen font-SpaceGrotesk font-medium text-[18px]">
+    <main
+      class="w-full lg:h-screen bg-[url('./images/bg-main-mobile.png')] lg:bg-[url('./images/bg-main-desktop.png')] bg-cover lg:bg-auto bg-no-repeat flex items-center justify-center flex-col lg:flex-row"
+    >
+      <!-- Card Secton -->
+
+      <section
+        class="w-full lg:w-[50%] flex items-center justify-center flex-col-reverse lg:flex-col space-y-6"
+      >
+        <!-- Front Card -->
+
+        <div class="relative bottom-16 lg:bottom-0 w-[286px] h-[157px]   lg:w-[447px]  lg:h-[245px] bg-card-front bg-cover bg-no-repeat"
+        >
+          <!-- Logo -->
+
+          <img
+            id="card-logo"
+            src="./images/card-logo.svg"
+            alt="Logo"
+            class="absolute top-5 left-5"
+          />
+
+          <!-- Card Number -->
+
+          <div
+            id="display-card-number"
+            class="absolute bottom-16 left-5 lg:text-3xl font-medium text-LightGrayishViolet tracking-widest"
+          >
+            0000 0000 0000 0000
+          </div>
+
+          <!-- Cardholder Name and Expiry -->
+          <div
+            class="absolute bottom-5 left-5 flex justify-between w-[90%] text-white"
+          >
+            <div id="card-name" class="uppercase">Jane Appleseed</div>
+            <div id="card-expiry" class="">
+              <span id="card-month">00</span>/<span id="card-year">00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back Card -->
+
+        <div class="w-[286px] h-[157px] ml-[10rem] lg:ml-[12rem]  lg:w-[447px]  lg:h-[245px] bg-card-back float-right bg-cover bg-no-repeat"
+        >
+          <p
+            id="display-cvc"
+            class="text-white text-right mt-[4rem] lg:mt-[6.8rem] mr-10 lg:mr-14"
+          >
+            000
+          </p>
+        </div>
+      </section>
+
+      <!-- Form Section -->
+
+      <section class="w-full lg:w-1/2 bg-white">
+        <form
+          id="card-form"
+          class=" bg-white p-10 lg:p-20 space-y-6 uppercase tracking-widest"
+        >
+          <!-- Card Name -->
+
+          <div>
+            <label
+              for="cardholder-name"
+              class="block text-sm font-bold text-VeryDarkViolet"
+              >Cardholder Name</label
+            >
+            <input
+              type="text"
+              id="cardholder-name"
+              placeholder="e.g. Jane Appleseed"
+              class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
+            />
+            <p class="error hidden normal-case text-RedError text-sm mt-2">
+              Name is required
+            </p>
+          </div>
+
+          <!-- Card Number -->
+
+          <div>
+            <label
+              for="card-number"
+              class="block text-sm font-bold text-VeryDarkViolet"
+              >Card Number</label
+            >
+            <input
+              type="text"
+              id="card-number"
+              maxlength="19"
+              placeholder="e.g. 1234 5678 9123 0000"
+              class="mt-1 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
+            />
+            <p class="error hidden normal-case text-RedError text-sm mt-2">
+              Wrong format, numbers only
+            </p>
+          </div>
+
+          <!-- Exp Date -->
+
+          <div class="w-full space-y-4 rounded-lg">
+            <!-- Expiration Date Fields -->
+            <div class="flex space-x-3 items-center justify-between">
+              <div class="w-1/2">
+                <label
+                  for="exp-month"
+                  class="block text-sm font-bold text-VeryDarkViolet"
+                >
+                  Exp. Date (MM/YY)
+                </label>
+                <div class="flex space-x-2 mt-2">
+                  <input
+                    type="text"
+                    id="exp-month"
+                    maxlength="2"
+                    placeholder="MM"
+                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    id="exp-year"
+                    maxlength="2"
+                    placeholder="YY"
+                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
+                  />
+
+                </div>
+                <p class="error hidden normal-case text-RedError text-sm mt-2">Can't be blank</p>
+              </div>
+              <!-- CVC Field -->
+              <div class="w-1/2">
+                <label
+                  for="cvc"
+                  class="block text-sm font-bold text-VeryDarkViolet"
+                >
+                  CVC
+                </label>
+                <input
+                  type="text"
+                  id="cvc"
+                  maxlength="3"
+                  placeholder="CVC"
+                  class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
+                />
+                <p class="error hidden normal-case text-RedError text-sm mt-2">Can't be blank</p>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+              <button
+               id="submit-btn"
+               
+                type="submit"
+                class="w-full bg-VeryDarkViolet text-white font-bold p-3 rounded-lg shadow hover:bg-indigo-600 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="success" class="hidden justify-center items-center flex-col gap-4">
+          <img src="./images/icon-complete.svg" alt="icon-complete">
+          <h1 class="uppercase font tracking-widest font-bold text-VeryDarkViolet">Thank You!</h1>
+          <p class="text-DarkGrayishViolet opacity-90">We've added your card details</p>
+          <button id="success-btn" class="w-2/4 px-8 py-4 bg-VeryDarkViolet rounded-lg text-white hover:opacity-80">Continue</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
